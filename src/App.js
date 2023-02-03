@@ -6,7 +6,7 @@ import Topbar from "./scenes/global/Topbar";
 import Sidebar from "./scenes/global/Sidebar";
 import Dashboard from "./scenes/dashboard";
 import Team from "./scenes/team";
-// import Resort from "./scenes/resort";
+import Resort from "./scenes/contacts";
 // import Booking from "./scenes/booking";
 // import Facilities from "./scenes/facilities";
 // import Coupon from "./scenes/coupon";
@@ -27,7 +27,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Dashboard />} />
               <Route path="/user" element={<Team />} />
-              {/* <Route path="/resort" element={<Resort />} /> */}
+              <Route path="/resort" element={<Resort />} />
               {/* <Route path="/booking" element={<Booking />} /> */}
               {/* <Route path="/facilities" element={<Facilities />} /> */}
               {/* <Route path="/coupon" element={<Coupon />} /> */}
