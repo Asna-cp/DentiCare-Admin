@@ -75,7 +75,7 @@ const Sidebar = () => {
                 ml="15px"
               >
                 <Typography variant="h3" color={colors.grey[100]}>
-                  Book Your Stay
+                DentiCare
                 </Typography>
                 <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
                   <MenuOutlinedIcon />
@@ -103,7 +103,7 @@ const Sidebar = () => {
                   fontWeight="bold"
                   sx={{ m: "10px 0 0 0" }}
                 >
-                  Book Your Appoiment
+                  Book Your Appointment
                 </Typography>
                 <Typography variant="h5" color={colors.greenAccent[500]}>
                   Admin
@@ -127,18 +127,25 @@ const Sidebar = () => {
               color={colors.grey[300]}
               sx={{ m: "15px 0 5px 20px" }}
             >
-              Manage Client & Doctors
+              Manage Doctors & Patients
             </Typography>
             <Item
-              title="Manage Patients"
-              to="/user"
+              title="Add Doctors"
+              to="/adddoctors"
               icon={<PeopleOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
             <Item
               title="Manage Doctors"
-              to="/resort"
+              to="/doctors"
+              icon={<PeopleOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
+              title="Manage Patients"
+              to="/patients"
               icon={<HomeWorkOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
@@ -148,31 +155,54 @@ const Sidebar = () => {
               color={colors.grey[300]}
               sx={{ m: "15px 0 5px 20px" }}
             >
+              Appointments
+            </Typography>
+
+            <Item
+              title="Appointment List"
+              to="/roomtype"
+              icon={<ApartmentOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+             <Typography
+              variant="h6"
+              color={colors.grey[300]}
+              sx={{ m: "15px 0 5px 20px" }}
+            >
               Treatments
             </Typography>
             <Item
-              title="Implant"
+              title="Add Treatments"
               to="/facilities"
               icon={<PoolOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
             <Item
-              title="Doctor Schedule"
+              title="Treatments List"
               to="/roomtype"
               icon={<ApartmentOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
+            
             <Typography
               variant="h6"
               color={colors.grey[300]}
               sx={{ m: "15px 0 5px 20px" }}
             >
-              Payments & Bookings
+            Doctor Schedule
             </Typography>
             <Item
-              title="Booking"
+              title="Add Schedule"
+              to="/booking"
+              icon={<ReceiptOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+             <Item
+              title="Schedule List"
               to="/booking"
               icon={<ReceiptOutlinedIcon />}
               selected={selected}
@@ -183,24 +213,24 @@ const Sidebar = () => {
               color={colors.grey[300]}
               sx={{ m: "15px 0 5px 20px" }}
             >
-         Department
+      Payment
             </Typography>
             <Item
-              title=""
+              title="Add Payment"
               to="/coupon"
               icon={<LocalActivityOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
             <Item
-              title=""
+              title="Payment List"
               to="/geography"
               icon={<MapOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
             <Item
-              title="Calendar"
+              title="Payment Invoice"
               to="/calendar"
               icon={<CalendarTodayOutlinedIcon />}
               selected={selected}
