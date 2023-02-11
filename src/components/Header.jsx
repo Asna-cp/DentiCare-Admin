@@ -19,6 +19,6 @@ const Header = ({ title, subtitle }) => {
       </Typography>
     </Box>
   );
-}
+};
 
 export default Header;

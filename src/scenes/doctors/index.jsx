@@ -71,7 +71,7 @@ const Doctors = () => {
 
   return (
     <Box m="20px">
-      <Header title="PATIENTS" subtitle="Managing The Patients" />
+      <Header title="DOCTORS" subtitle="Managing The Doctors" />
       <Box
         m="40px 0 0 0"
         height="75vh"

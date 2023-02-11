@@ -7,14 +7,11 @@ import Header from "../../components/Header";
 const AddDoctors = () => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
 
-  const handleFormSubmit = (values) => {
-    console.log(values);
-  };
+  const handleFormSubmit = (values) => {};
 
   return (
     <Box m="20px">
-      <Header title="CREATE USER" subtitle="Create a New User Profile" />
-
+      <Header title="Add Doctors" subtitle="Create a New Doctor Profile" />
       <Formik
         onSubmit={handleFormSubmit}
         initialValues={initialValues}
@@ -93,11 +90,11 @@ const AddDoctors = () => {
                 fullWidth
                 variant="filled"
                 type="text"
-                label="Address 1"
+                label="Department"
                 onBlur={handleBlur}
                 onChange={handleChange}
                 value={values.address1}
-                name="address1"
+                name="department"
                 error={!!touched.address1 && !!errors.address1}
                 helperText={touched.address1 && errors.address1}
                 sx={{ gridColumn: "span 4" }}
@@ -106,11 +103,11 @@ const AddDoctors = () => {
                 fullWidth
                 variant="filled"
                 type="text"
-                label="Address 2"
+                label="Details"
                 onBlur={handleBlur}
                 onChange={handleChange}
                 value={values.address2}
-                name="address2"
+                name="details"
                 error={!!touched.address2 && !!errors.address2}
                 helperText={touched.address2 && errors.address2}
                 sx={{ gridColumn: "span 4" }}
@@ -118,7 +115,7 @@ const AddDoctors = () => {
             </Box>
             <Box display="flex" justifyContent="end" mt="20px">
               <Button type="submit" color="secondary" variant="contained">
-                Create New User
+                Add New Doctor
               </Button>
             </Box>
           </form>

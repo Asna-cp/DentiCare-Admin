@@ -75,7 +75,7 @@ const Sidebar = () => {
                 ml="15px"
               >
                 <Typography variant="h3" color={colors.grey[100]}>
-                DentiCare
+                  DentiCare
                 </Typography>
                 <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
                   <MenuOutlinedIcon />
@@ -127,7 +127,7 @@ const Sidebar = () => {
               color={colors.grey[300]}
               sx={{ m: "15px 0 5px 20px" }}
             >
-              Manage Doctors & Patients
+              Manage Doctors
             </Typography>
             <Item
               title="Add Doctors"
@@ -143,18 +143,33 @@ const Sidebar = () => {
               selected={selected}
               setSelected={setSelected}
             />
-            <Item
-              title="Manage Patients"
-              to="/patients"
-              icon={<HomeWorkOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
+
             <Typography
               variant="h6"
               color={colors.grey[300]}
               sx={{ m: "15px 0 5px 20px" }}
             >
+              Manage Patients
+            </Typography>
+            <Typography
+              variant="h6"
+              color={colors.grey[300]}
+              sx={{ m: "15px 0 5px 20px" }}
+            >
+              <Item
+                title="Manage Patients"
+                to="/patients"
+                icon={<HomeWorkOutlinedIcon />}
+                selected={selected}
+                setSelected={setSelected}
+              />
+              <Item
+                title="View Patients"
+                to="/patients"
+                icon={<HomeWorkOutlinedIcon />}
+                selected={selected}
+                setSelected={setSelected}
+              />
               Appointments
             </Typography>
 
@@ -165,7 +180,7 @@ const Sidebar = () => {
               selected={selected}
               setSelected={setSelected}
             />
-             <Typography
+            <Typography
               variant="h6"
               color={colors.grey[300]}
               sx={{ m: "15px 0 5px 20px" }}
@@ -186,13 +201,13 @@ const Sidebar = () => {
               selected={selected}
               setSelected={setSelected}
             />
-            
+
             <Typography
               variant="h6"
               color={colors.grey[300]}
               sx={{ m: "15px 0 5px 20px" }}
             >
-            Doctor Schedule
+              Doctor Schedule
             </Typography>
             <Item
               title="Add Schedule"
@@ -201,38 +216,10 @@ const Sidebar = () => {
               selected={selected}
               setSelected={setSelected}
             />
-             <Item
+            <Item
               title="Schedule List"
               to="/booking"
               icon={<ReceiptOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Typography
-              variant="h6"
-              color={colors.grey[300]}
-              sx={{ m: "15px 0 5px 20px" }}
-            >
-      Payment
-            </Typography>
-            <Item
-              title="Add Payment"
-              to="/coupon"
-              icon={<LocalActivityOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="Payment List"
-              to="/geography"
-              icon={<MapOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="Payment Invoice"
-              to="/calendar"
-              icon={<CalendarTodayOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />

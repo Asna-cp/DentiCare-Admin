@@ -3,7 +3,6 @@ import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { tokens } from "../../theme";
 import { mockDataContacts } from "../../data/mockData";
 import { useTheme } from "@mui/material";
-
 import Header from "../../components/Header";
 
 const Team = () => {
@@ -38,23 +37,29 @@ const Team = () => {
       type: "number",
       flex: 1,
     },
+
     {
-      field: "address",
-      headerName: "Address",
+      field: "update",
+      headerName: "Update",
       type: "number",
       flex: 1,
-    },
-    {
-      field: "city",
-      headerName: "City",
-      type: "number",
-      flex: 1,
-    },
-    {
-      field: "zipcode",
-      headerName: "Zipcode",
-      type: "number",
-      flex: 1,
+      renderCell: ({ row: { access } }) => {
+        return (
+          <Box
+            width="60%"
+            m="0 auto"
+            p="10px"
+            display="flex"
+            justifyContent="center"
+            backgroundColor={
+              access === "admin"
+                ? colors.greenAccent[600]
+                : colors.greenAccent[700]
+            }
+            borderRadius="4px"
+          ></Box>
+        );
+      },
     },
   ];
 
