@@ -52,27 +52,27 @@ const Doctors = () => {
       flex: 1,
       renderCell: ({ row: { access } }) => {
         return (
-          // <Button size="md colour=primary">Medium</Button>
-          <Button
-            width="60%"
-            m="0 auto"
-            p="5px"
-            display="flex"
-            justifyContent="center"
-            backgroundColor={
-              access === "admin"
-                ? colors.greenAccent[600]
-                : colors.greenAccent[700]
-            }
-            borderRadius="4px"
-          >
-            {access === "admin" && <AdminPanelSettingsOutlinedIcon />}
-            {access === "manager" && <SecurityOutlinedIcon />}
-            {access === "client" && <LockOpenOutlinedIcon />}
-            <Typography color={colors.grey[100]} sx={{ ml: "5px" }}>
-              {access}
-            </Typography>
-          </Button>
+          <Button size="md" sx={{backgroundColor:"grey"}}>Remove</Button>
+          // <Button
+          //   width="60%"
+          //   m="0 auto"
+          //   p="5px"
+          //   display="flex"
+          //   justifyContent="center"
+          //   backgroundColor={
+          //     access === "admin"
+          //       ? colors.greenAccent[600]
+          //       : colors.greenAccent[700]
+          //   }
+          //   borderRadius="4px"
+          // >
+          //   {access === "admin" && <AdminPanelSettingsOutlinedIcon />}
+          //   {access === "manager" && <SecurityOutlinedIcon />}
+          //   {access === "client" && <LockOpenOutlinedIcon />}
+          //   <Typography color={colors.grey[100]} sx={{ ml: "5px" }}>
+          //     {access}
+          //   </Typography>
+          // </Button>
         );
       },
     },

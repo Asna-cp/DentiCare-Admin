@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { tokens } from "../../theme";
 import { useTheme } from "@mui/material";
@@ -33,6 +33,16 @@ const Team = () => {
       headerName: "Email ",
       flex: 1,
     },
+    {
+    field: "access",
+    headerName: "Access Level",
+    flex: 1,
+    renderCell: ({ row: { access } }) => {
+      return (
+        <Button size="md" sx={{backgroundColor:"grey"}}>Remove</Button>
+      );
+    },
+  },
   ];
 
   return (

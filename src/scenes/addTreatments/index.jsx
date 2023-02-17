@@ -41,7 +41,7 @@ const AddTreatments = () => {
             <Box
               display="grid"
               gap="30px"
-              gridTemplateColumns="repeat(4, minmax(0, 1fr))"
+              gridTemplateColumns="repeat(2, minmax(0, 1fr))"
               sx={{
                 "& > div": { gridColumn: isNonMobile ? undefined : "span 4" },
               }}
@@ -71,7 +71,7 @@ const AddTreatments = () => {
                 name="discription"
                 error={!!touched.contact && !!errors.contact}
                 helperText={touched.contact && errors.contact}
-                sx={{ gridColumn: "span 4" }}
+                sx={{ gridColumn: "span 2" }}
               />
                <TextField
                 fullWidth
@@ -84,7 +84,7 @@ const AddTreatments = () => {
                 name="about"
                 error={!!touched.contact && !!errors.contact}
                 helperText={touched.contact && errors.contact}
-                sx={{ gridColumn: "span 4" }}
+                sx={{ gridColumn: "span 2" }}
               />
             
             </Box>

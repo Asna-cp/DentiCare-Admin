@@ -51,13 +51,11 @@ const ViewAppointments = () => {
     {
       field: "date",
       headerName: "Date",
-      type: "number",
       flex: 1,
     },
     {
       field: "time",
       headerName: "Time",
-      type: "number",
       flex: 1,
     },
 
