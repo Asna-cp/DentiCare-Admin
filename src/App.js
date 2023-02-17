@@ -8,6 +8,9 @@ import Dashboard from "./scenes/dashboard";
 import Doctors from "./scenes/doctors";
 import Patients from "./scenes/patients";
 import AddDoctors from "./scenes/addDoctors";
+import Appointments from "./scenes/appointment";
+import Treatments from "./scenes/addTreatments";
+
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -24,6 +27,9 @@ function App() {
               <Route path="/doctors" element={<Doctors />} />
               <Route path="/patients" element={<Patients />} />
               <Route path="/addDoctors" element={<AddDoctors />} />
+              <Route path="/appointments" element={<Appointments />} />
+              <Route path="/addTreatments" element={<Treatments />} />
+            
             </Routes>
           </main>
         </div>

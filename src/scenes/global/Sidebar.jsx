@@ -165,7 +165,7 @@ const Sidebar = () => {
               />
               <Item
                 title="View Patients"
-                to="/patients"
+                to="/editPatient"
                 icon={<HomeWorkOutlinedIcon />}
                 selected={selected}
                 setSelected={setSelected}
@@ -175,7 +175,7 @@ const Sidebar = () => {
 
             <Item
               title="Appointment List"
-              to="/roomtype"
+              to="/appointments"
               icon={<ApartmentOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
@@ -189,7 +189,7 @@ const Sidebar = () => {
             </Typography>
             <Item
               title="Add Treatments"
-              to="/facilities"
+              to="/addTreatments"
               icon={<PoolOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}

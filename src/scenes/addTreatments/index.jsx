@@ -5,17 +5,16 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import Header from "../../components/Header";
 import axios from "axios";
 
-const AddDoctors = () => {
+const AddTreatments = () => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
   const initialValues = {
     treatmentname: "",
-    specialist: "",
     discription: "",
-    experience: "",
+    about: "",
   };
   const handleFormSubmit = (values) => {
     console.log(values);
-    axios.post(`${process.env.REACT_APP_PORT}/addDoctors`, values);
+    axios.post(`${process.env.REACT_APP_PORT}/addTreatments`, values);
   };
   // .then((response) => {
   //   navigate("");
@@ -24,7 +23,7 @@ const AddDoctors = () => {
 
   return (
     <Box m="20px">
-      <Header title="Add Doctors" subtitle="Create a New Doctor Profile" />
+      <Header title="Add Treatments" subtitle="Add Treatment" />
       <Formik
         onSubmit={handleFormSubmit}
         initialValues={initialValues}
@@ -51,29 +50,16 @@ const AddDoctors = () => {
                 fullWidth
                 variant="filled"
                 type="text"
-                label="First Name"
+                label="Treatment Name"
                 onBlur={handleBlur}
                 onChange={handleChange}
                 value={values.firstName}
-                name="doctorName"
+                name="treatmentname"
                 error={!!touched.firstName && !!errors.firstName}
                 helperText={touched.firstName && errors.firstName}
                 sx={{ gridColumn: "span 2" }}
               />
 
-              <TextField
-                fullWidth
-                variant="filled"
-                type="text"
-                label="Specialist"
-                onBlur={handleBlur}
-                onChange={handleChange}
-                value={values.email}
-                name="specialist"
-                error={!!touched.email && !!errors.email}
-                helperText={touched.email && errors.email}
-                sx={{ gridColumn: "span 4" }}
-              />
               <TextField
                 fullWidth
                 variant="filled"
@@ -87,23 +73,24 @@ const AddDoctors = () => {
                 helperText={touched.contact && errors.contact}
                 sx={{ gridColumn: "span 4" }}
               />
-              <TextField
+               <TextField
                 fullWidth
                 variant="filled"
-                type="number"
-                label="Experience"
+                type="text"
+                label="About"
                 onBlur={handleBlur}
                 onChange={handleChange}
-                value={values.firstName}
-                name="experience"
-                error={!!touched.firstName && !!errors.firstName}
-                helperText={touched.firstName && errors.firstName}
-                sx={{ gridColumn: "span 2" }}
+                value={values.contact}
+                name="about"
+                error={!!touched.contact && !!errors.contact}
+                helperText={touched.contact && errors.contact}
+                sx={{ gridColumn: "span 4" }}
               />
+            
             </Box>
             <Box display="flex" justifyContent="end" mt="20px">
               <Button type="submit" color="secondary" variant="contained">
-                Add New Doctor
+                Add New Treatment
               </Button>
             </Box>
           </form>
@@ -131,7 +118,7 @@ const initialValues = {
   treatmentname: "",
   specialist: "",
   discription: "",
-  experience: "",
+  about: "",
 };
 
-export default AddDoctors;
+export default AddTreatments;

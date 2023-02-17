@@ -1,45 +1,65 @@
 import { Box } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { tokens } from "../../theme";
+import { mockDataContacts } from "../../data/mockData";
 import { useTheme } from "@mui/material";
 import Header from "../../components/Header";
-import { allpatient } from "../../actions/patient";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
 
 const Team = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(allpatient());
-  }, [dispatch]);
-
-  const patient = useSelector((state) => state.patient);
-  console.log(patient);
-
   const columns = [
-    { field: "_id", headerName: "ID", flex: 0.5 },
+    { field: "id", headerName: "ID", flex: 0.5 },
+    { field: "registrarId", headerName: "Registrar ID" },
     {
       field: "name",
       headerName: "Name",
       flex: 1,
       cellClassName: "name-column--cell",
-      justifyContent: "center",
+    },
+   
+    {
+      field: "phone",
+      headerName: "Phone Number",
+      type: "number",
+      flex: 1,
+    },
+    {
+      field: "email",
+      headerName: "Email",
+      type: "number",
+      flex: 1,
     },
 
     {
-      field: "email",
-      headerName: "Email ",
+      field: "update",
+      headerName: "Update",
+      type: "number",
       flex: 1,
+      renderCell: ({ row: { access } }) => {
+        return (
+          <Box
+            width="60%"
+            m="0 auto"
+            p="10px"
+            display="flex"
+            justifyContent="center"
+            backgroundColor={
+              access === "admin"
+                ? colors.greenAccent[600]
+                : colors.greenAccent[700]
+            }
+            borderRadius="4px"
+          ></Box>
+        );
+      },
     },
   ];
 
   return (
     <Box m="20px">
-      <Header title="PATIENTS" subtitle="Managing The Patients" />
+      <Header title="APPOINTMENTS" subtitle="Managing The Appointments" />
       <Box
         m="40px 0 0 0"
         height="75vh"
@@ -73,10 +93,9 @@ const Team = () => {
         }}
       >
         <DataGrid
-          rows={patient}
+          rows={mockDataContacts}
           columns={columns}
           components={{ Toolbar: GridToolbar }}
-          getRowId={(row) => row._id}
         />
       </Box>
     </Box>
