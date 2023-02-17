@@ -8,13 +8,12 @@ import axios from "axios";
 const AddDoctors = () => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
   const initialValues = {
-    treatmentname: "",
+    doctorName: "",
     specialist: "",
     discription: "",
     experience: "",
   };
   const handleFormSubmit = (values) => {
-    console.log(values);
     axios.post(`${process.env.REACT_APP_PORT}/addDoctors`, values);
   };
   // .then((response) => {
@@ -128,7 +127,7 @@ const checkoutSchema = yup.object().shape({
   address2: yup.string().required("required"),
 });
 const initialValues = {
-  treatmentname: "",
+  doctorName: "",
   specialist: "",
   discription: "",
   experience: "",

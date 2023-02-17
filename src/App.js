@@ -10,6 +10,7 @@ import Patients from "./scenes/patients";
 import AddDoctors from "./scenes/addDoctors";
 import Appointments from "./scenes/appointment";
 import Treatments from "./scenes/addTreatments";
+import ViewTreatments from "./scenes/addTreatments/viewTreatments";
 
 
 function App() {
@@ -29,7 +30,7 @@ function App() {
               <Route path="/addDoctors" element={<AddDoctors />} />
               <Route path="/appointments" element={<Appointments />} />
               <Route path="/addTreatments" element={<Treatments />} />
-            
+            <Route path="/viewTreatments" element={<ViewTreatments />} />
             </Routes>
           </main>
         </div>

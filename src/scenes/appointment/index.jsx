@@ -1,60 +1,89 @@
 import { Box } from "@mui/material";
-import { DataGrid, GridToolbar } from "@mui/x-data-grid";
+import { DataGrid } from "@mui/x-data-grid";
 import { tokens } from "../../theme";
-import { mockDataContacts } from "../../data/mockData";
 import { useTheme } from "@mui/material";
 import Header from "../../components/Header";
+import axios from "axios";
+import { useState } from "react";
+import { useEffect } from "react";
 
-const Team = () => {
+const ViewAppointments = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
+  const [appointments, setAppointments] = useState([]);
+  async function ViewAppointments() {
+    axios
+      .get("http://localhost:8080/admin/allappointments")
+      .then((response) => {
+        setAppointments(response?.data);
+      });
+  }
+
+  useEffect(() => {
+    ViewAppointments();
+  }, []);
+
   const columns = [
-    { field: "id", headerName: "ID", flex: 0.5 },
-    { field: "registrarId", headerName: "Registrar ID" },
+    { field: "_id", headerName: "ID", flex: 0.5 },
     {
       field: "name",
       headerName: "Name",
       flex: 1,
       cellClassName: "name-column--cell",
     },
-   
     {
-      field: "phone",
+      field: "lastName",
+      headerName: "Last Name",
+      flex: 1,
+      cellClassName: "name-column--cell",
+    },
+    {
+      field: "phoneNumber",
       headerName: "Phone Number",
-      type: "number",
       flex: 1,
     },
     {
       field: "email",
       headerName: "Email",
+      flex: 1,
+    },
+    {
+      field: "date",
+      headerName: "Date",
+      type: "number",
+      flex: 1,
+    },
+    {
+      field: "time",
+      headerName: "Time",
       type: "number",
       flex: 1,
     },
 
-    {
-      field: "update",
-      headerName: "Update",
-      type: "number",
-      flex: 1,
-      renderCell: ({ row: { access } }) => {
-        return (
-          <Box
-            width="60%"
-            m="0 auto"
-            p="10px"
-            display="flex"
-            justifyContent="center"
-            backgroundColor={
-              access === "admin"
-                ? colors.greenAccent[600]
-                : colors.greenAccent[700]
-            }
-            borderRadius="4px"
-          ></Box>
-        );
-      },
-    },
+    // {
+    //   field: "update",
+    //   headerName: "Update",
+    //   type: "number",
+    //   flex: 1,
+    //   renderCell: ({ row: { access } }) => {
+    //     return (
+    //       <Box
+    //         width="60%"
+    //         m="0 auto"
+    //         p="10px"
+    //         display="flex"
+    //         justifyContent="center"
+    //         backgroundColor={
+    //           access === "admin"
+    //             ? colors.greenAccent[600]
+    //             : colors.greenAccent[700]
+    //         }
+    //         borderRadius="4px"
+    //       ></Box>
+    //     );
+    //   },
+    // },
   ];
 
   return (
@@ -93,13 +122,14 @@ const Team = () => {
         }}
       >
         <DataGrid
-          rows={mockDataContacts}
+          rows={appointments}
           columns={columns}
-          components={{ Toolbar: GridToolbar }}
+          // components={{ Toolbar: GridToolbar }}
+          getRowId={(row) => row._id}
         />
       </Box>
     </Box>
   );
 };
 
-export default Team;
+export default ViewAppointments;

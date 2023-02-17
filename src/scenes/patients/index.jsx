@@ -18,8 +18,6 @@ const Team = () => {
   }, [dispatch]);
 
   const patient = useSelector((state) => state.patient);
-  console.log(patient);
-
   const columns = [
     { field: "_id", headerName: "ID", flex: 0.5 },
     {

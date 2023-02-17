@@ -116,7 +116,6 @@ const checkoutSchema = yup.object().shape({
 });
 const initialValues = {
   treatmentname: "",
-  specialist: "",
   discription: "",
   about: "",
 };

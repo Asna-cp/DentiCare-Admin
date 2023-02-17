@@ -9,40 +9,40 @@ import axios from "axios";
 import { useState } from "react";
 import { useEffect } from "react";
 
-const Doctors = () => {
+const ViewTreatments = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
-  const [doctors, setDoctors] = useState([]);
+  const [treatments, setTreatments] = useState([]);
 
-  async function getDoctors() {
+  async function ViewTreatments() {
     axios
-      .get("http://localhost:8080/api/v1/user/alldoctors")
+      .get("http://localhost:8080/api/v1/user/alltreatments")
       .then((response) => {
-        setDoctors(response?.data);
+        setTreatments(response?.data);
       });
   }
   useEffect(() => {
-    getDoctors();
+    ViewTreatments();
   }, []);
 
   const columns = [
     { field: "_id", headerName: "ID" },
     {
-      field: "doctorName",
-      headerName: "Doctor Name",
+      field: "treatmentname",
+      headerName: "Treatment Name",
       flex: 1,
       cellClassName: "name-column--cell",
     },
     {
-      field: "specialist",
-      headerName: "Specialist",
+      field: "discription",
+      headerName: "Discription",
       headerAlign: "left",
       align: "left",
     },
     {
-      field: "discription",
-      headerName: "Discription",
+      field: "about",
+      headerName: "About",
       flex: 1,
     },
 
@@ -111,7 +111,7 @@ const Doctors = () => {
         }}
       >
         <DataGrid
-          rows={doctors}
+          rows={treatments}
           columns={columns}
           getRowId={(row) => row._id}
         />
@@ -120,4 +120,4 @@ const Doctors = () => {
   );
 };
 
-export default Doctors;
+export default ViewTreatments;

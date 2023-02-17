@@ -9,11 +9,7 @@ import PeopleOutlinedIcon from "@mui/icons-material/PeopleOutlined";
 import HomeWorkOutlinedIcon from "@mui/icons-material/HomeWorkOutlined";
 import PoolOutlinedIcon from "@mui/icons-material/PoolOutlined";
 import ApartmentOutlinedIcon from "@mui/icons-material/ApartmentOutlined";
-import CalendarTodayOutlinedIcon from "@mui/icons-material/CalendarTodayOutlined";
-import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
-import ReceiptOutlinedIcon from "@mui/icons-material/ReceiptOutlined";
-import LocalActivityOutlinedIcon from "@mui/icons-material/LocalActivityOutlined";
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
@@ -87,15 +83,6 @@ const Sidebar = () => {
           {/* ADMIN */}
           {!isCollapsed && (
             <Box mb="25px">
-              <Box display="flex" justifyContent="center" alignItems="center">
-                <img
-                  alt="profile-admin"
-                  width="100px"
-                  height="100px"
-                  src="../../assets/profile.png"
-                  style={{ cursor: "pointer", borderRadius: "50%" }}
-                />
-              </Box>
               <Box textAlign="center">
                 <Typography
                   variant="h2"
@@ -105,9 +92,10 @@ const Sidebar = () => {
                 >
                   Book Your Appointment
                 </Typography>
-                <Typography variant="h5" color={colors.greenAccent[500]}>
-                  Admin
-                </Typography>
+                <Typography
+                  variant="h5"
+                  color={colors.greenAccent[500]}
+                ></Typography>
               </Box>
             </Box>
           )}
@@ -163,13 +151,6 @@ const Sidebar = () => {
                 selected={selected}
                 setSelected={setSelected}
               />
-              <Item
-                title="View Patients"
-                to="/editPatient"
-                icon={<HomeWorkOutlinedIcon />}
-                selected={selected}
-                setSelected={setSelected}
-              />
               Appointments
             </Typography>
 
@@ -196,33 +177,16 @@ const Sidebar = () => {
             />
             <Item
               title="Treatments List"
-              to="/roomtype"
+              to="/viewTreatments"
               icon={<ApartmentOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
-
             <Typography
               variant="h6"
               color={colors.grey[300]}
               sx={{ m: "15px 0 5px 20px" }}
-            >
-              Doctor Schedule
-            </Typography>
-            <Item
-              title="Add Schedule"
-              to="/booking"
-              icon={<ReceiptOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="Schedule List"
-              to="/booking"
-              icon={<ReceiptOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
+            ></Typography>
           </Box>
         </Menu>
       </ProSidebar>
