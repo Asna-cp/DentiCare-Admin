@@ -10,7 +10,6 @@ import { useEffect } from "react";
 const ViewAppointments = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-
   const [appointments, setAppointments] = useState([]);
   async function ViewAppointments() {
     axios
@@ -58,30 +57,6 @@ const ViewAppointments = () => {
       headerName: "Time",
       flex: 1,
     },
-
-    // {
-    //   field: "update",
-    //   headerName: "Update",
-    //   type: "number",
-    //   flex: 1,
-    //   renderCell: ({ row: { access } }) => {
-    //     return (
-    //       <Box
-    //         width="60%"
-    //         m="0 auto"
-    //         p="10px"
-    //         display="flex"
-    //         justifyContent="center"
-    //         backgroundColor={
-    //           access === "admin"
-    //             ? colors.greenAccent[600]
-    //             : colors.greenAccent[700]
-    //         }
-    //         borderRadius="4px"
-    //       ></Box>
-    //     );
-    //   },
-    // },
   ];
 
   return (
@@ -122,7 +97,6 @@ const ViewAppointments = () => {
         <DataGrid
           rows={appointments}
           columns={columns}
-          // components={{ Toolbar: GridToolbar }}
           getRowId={(row) => row._id}
         />
       </Box>

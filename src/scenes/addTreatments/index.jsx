@@ -13,7 +13,6 @@ const AddTreatments = () => {
     about: "",
   };
   const handleFormSubmit = (values) => {
-    console.log(values);
     axios.post(`${process.env.REACT_APP_PORT}/addTreatments`, values);
   };
   // .then((response) => {
@@ -73,7 +72,7 @@ const AddTreatments = () => {
                 helperText={touched.contact && errors.contact}
                 sx={{ gridColumn: "span 2" }}
               />
-               <TextField
+              <TextField
                 fullWidth
                 variant="filled"
                 type="text"
@@ -86,7 +85,6 @@ const AddTreatments = () => {
                 helperText={touched.contact && errors.contact}
                 sx={{ gridColumn: "span 2" }}
               />
-            
             </Box>
             <Box display="flex" justifyContent="end" mt="20px">
               <Button type="submit" color="secondary" variant="contained">

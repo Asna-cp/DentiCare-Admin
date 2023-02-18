@@ -10,7 +10,6 @@ import { useEffect } from "react";
 const Team = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-
   const dispatch = useDispatch();
 
   useEffect(() => {
