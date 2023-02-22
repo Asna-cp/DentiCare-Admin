@@ -13,9 +13,15 @@ const AddTreatments = () => {
     about: "",
   };
   const handleFormSubmit = (values) => {
-    axios.post(`${process.env.REACT_APP_PORT}/addTreatments`, values);
-  };
-  // .then((response) => {
+    axios
+    .post(`${process.env.REACT_APP_PORT}/addTreatments`, values)
+    .then((response) => {
+    if (response) {
+      window.location.reload();
+    }
+  })
+  .catch((error) => {});
+};
   //   navigate("");
   // }).catch(error) => {
   // });

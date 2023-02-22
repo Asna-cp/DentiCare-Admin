@@ -11,7 +11,7 @@ const Doctors = () => {
   const colors = tokens(theme.palette.mode);
 
   const [doctors, setDoctors] = useState([]);
-
+  const [change, setChange] = useState(false);
   async function getDoctors() {
     axios
       .get("http://localhost:8080/api/v1/user/alldoctors")
@@ -21,7 +21,17 @@ const Doctors = () => {
   }
   useEffect(() => {
     getDoctors();
-  }, []);
+  }, [change]);
+
+  // const handleRowClick = (param, event) => {
+  //   event.stopPropagation();
+  // };
+
+  function removeDoctor(id) {
+    axios
+      .post(`http://localhost:8080/admin/removeDoctor/${id}`)
+      .then(change === true ? setChange(false) : setChange(true));
+  }
 
   const columns = [
     { field: "_id", headerName: "ID" },
@@ -47,9 +57,13 @@ const Doctors = () => {
       field: "access",
       headerName: "Access Level",
       flex: 1,
-      renderCell: ({ row: { access } }) => {
+      renderCell: (cellValues) => {
         return (
-          <Button size="md" sx={{ backgroundColor: "grey" }}>
+          <Button
+            onClick={() => removeDoctor(cellValues.row._id)}
+            size="md"
+            sx={{ backgroundColor: "grey" }}
+          >
             Remove
           </Button>
         );
@@ -93,6 +107,7 @@ const Doctors = () => {
           rows={doctors}
           columns={columns}
           getRowId={(row) => row._id}
+          // onRowClick={handleRowClick}
         />
       </Box>
     </Box>

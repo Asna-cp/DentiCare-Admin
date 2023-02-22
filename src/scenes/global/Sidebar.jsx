@@ -7,7 +7,6 @@ import { tokens } from "../../theme";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import PeopleOutlinedIcon from "@mui/icons-material/PeopleOutlined";
 import HomeWorkOutlinedIcon from "@mui/icons-material/HomeWorkOutlined";
-import PoolOutlinedIcon from "@mui/icons-material/PoolOutlined";
 import ApartmentOutlinedIcon from "@mui/icons-material/ApartmentOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 
@@ -137,23 +136,44 @@ const Sidebar = () => {
               color={colors.grey[300]}
               sx={{ m: "15px 0 5px 20px" }}
             >
-              Manage Patients
+             Category
             </Typography>
+            <Item
+              title="Add Category"
+              to="/addCategory"
+              icon={<PeopleOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
+              title="View Category"
+              to="/viewCategory"
+              icon={<PeopleOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+
             <Typography
               variant="h6"
               color={colors.grey[300]}
               sx={{ m: "15px 0 5px 20px" }}
             >
-              <Item
-                title="Manage Patients"
-                to="/patients"
-                icon={<HomeWorkOutlinedIcon />}
-                selected={selected}
-                setSelected={setSelected}
-              />
+              Manage Patients
+            </Typography>
+            <Item
+              title="Patients List"
+              to="/patients"
+              icon={<HomeWorkOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Typography
+              variant="h6"
+              color={colors.grey[300]}
+              sx={{ m: "15px 0 5px 20px" }}
+            >
               Appointments
             </Typography>
-
             <Item
               title="Appointment List"
               to="/appointments"
@@ -171,7 +191,7 @@ const Sidebar = () => {
             <Item
               title="Add Treatments"
               to="/addTreatments"
-              icon={<PoolOutlinedIcon />}
+              icon={<ApartmentOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />

@@ -11,6 +11,7 @@ import AddDoctors from "./scenes/addDoctors";
 import Appointments from "./scenes/appointment";
 import Treatments from "./scenes/addTreatments";
 import ViewTreatments from "./scenes/addTreatments/viewTreatments";
+import AddCategory from "./scenes/addCategory";
 
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
               <Route path="/appointments" element={<Appointments />} />
               <Route path="/addTreatments" element={<Treatments />} />
             <Route path="/viewTreatments" element={<ViewTreatments />} />
+            <Route path="/addCategory" element={<AddCategory />} />
             </Routes>
           </main>
         </div>

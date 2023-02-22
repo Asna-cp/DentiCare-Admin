@@ -36,9 +36,9 @@ const Team = () => {
     field: "access",
     headerName: "Access Level",
     flex: 1,
-    renderCell: ({ row: { access } }) => {
+    renderCell: (cellValues) => {
       return (
-        <Button size="md" sx={{backgroundColor:"grey"}}>Remove</Button>
+        <Button  type="submit"size="md" sx={{backgroundColor:"grey"}}>Remove</Button>
       );
     },
   },

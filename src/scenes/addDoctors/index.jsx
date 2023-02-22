@@ -5,29 +5,39 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import Header from "../../components/Header";
 import axios from "axios";
 
+const doctorSchema = yup.object().shape({
+  doctorName: yup.string().required("required"),
+  specialist: yup.string().required("required"),
+  discription: yup.string().required("required"),
+  experience: yup.number().required("required"),
+});
+
+const initialValues = {
+  doctorName: "",
+  specialist: "",
+  discription: "",
+  experience: "",
+};
 const AddDoctors = () => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
-  const initialValues = {
-    doctorName: "",
-    specialist: "",
-    discription: "",
-    experience: "",
-  };
   const handleFormSubmit = (values) => {
-    axios.post(`${process.env.REACT_APP_PORT}/addDoctors`, values);
+    axios
+      .post(`${process.env.REACT_APP_PORT}/addDoctors`, values)
+      .then((response) => {
+        if (response) {
+          window.location.reload();
+        }
+      })
+      .catch((error) => {});
   };
-  // .then((response) => {
-  //   navigate("");
-  // }).catch(error) => {
-  // });
 
   return (
     <Box m="20px">
-      <Header title="Add Doctors" subtitle="Create a New Doctor Profile" />
+      <Header title="Add Doctors" subtitle="Add New Doctor Profile" />
       <Formik
         onSubmit={handleFormSubmit}
         initialValues={initialValues}
-        // validationSchema={checkoutSchema}
+        validationSchema={doctorSchema}
       >
         {({
           values,
@@ -110,27 +120,6 @@ const AddDoctors = () => {
       </Formik>
     </Box>
   );
-};
-
-const phoneRegExp =
-  /^((\+[1-9]{1,4}[ -]?)|(\([0-9]{2,3}\)[ -]?)|([0-9]{2,4})[ -]?)*?[0-9]{3,4}[ -]?[0-9]{3,4}$/;
-
-const checkoutSchema = yup.object().shape({
-  firstName: yup.string().required("required"),
-  lastName: yup.string().required("required"),
-  email: yup.string().email("invalid email").required("required"),
-  contact: yup
-    .string()
-    .matches(phoneRegExp, "Phone number is not valid")
-    .required("required"),
-  address1: yup.string().required("required"),
-  address2: yup.string().required("required"),
-});
-const initialValues = {
-  doctorName: "",
-  specialist: "",
-  discription: "",
-  experience: "",
 };
 
 export default AddDoctors;
