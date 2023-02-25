@@ -1,22 +1,37 @@
 import { Box, Button } from "@mui/material";
-import { DataGrid, GridToolbar } from "@mui/x-data-grid";
+import { DataGrid } from "@mui/x-data-grid";
 import { tokens } from "../../theme";
 import { useTheme } from "@mui/material";
 import Header from "../../components/Header";
-import { allpatient } from "../../actions/patient";
-import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
+import axios from "axios";
+import { useState } from "react";
 
 const Team = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  const dispatch = useDispatch();
+
+  const [patients, setPatients] = useState([]);
+  const [change, setChange] = useState([false]);
+
+  async function Team() {
+    axios
+      .get("http://localhost:8080/api/v1/user/allpatients")
+      .then((response) => {
+        setPatients(response?.data);
+      });
+  }
 
   useEffect(() => {
-    dispatch(allpatient());
-  }, [dispatch]);
+    Team();
+  }, [change]);
 
-  const patient = useSelector((state) => state.patient);
+  //REMOVE PATIENTS
+  function removePatients(id) {
+    axios
+      .post(`${process.env.REACT_APP_PORT}/removePatients/${id}`)
+      .then(change === true ? setChange(false) : setChange(true));
+  }
   const columns = [
     { field: "_id", headerName: "ID", flex: 0.5 },
     {
@@ -33,15 +48,21 @@ const Team = () => {
       flex: 1,
     },
     {
-    field: "access",
-    headerName: "Access Level",
-    flex: 1,
-    renderCell: (cellValues) => {
-      return (
-        <Button  type="submit"size="md" sx={{backgroundColor:"grey"}}>Remove</Button>
-      );
+      field: "access",
+      headerName: "Access Level",
+      flex: 1,
+      renderCell: (cellValues) => {
+        return (
+          <Button
+            onClick={() => removePatients(cellValues.row._id)}
+            size="md"
+            sx={{ backgroundColor: "grey" }}
+          >
+            Remove
+          </Button>
+        );
+      },
     },
-  },
   ];
 
   return (
@@ -80,9 +101,8 @@ const Team = () => {
         }}
       >
         <DataGrid
-          rows={patient}
+          rows={patients}
           columns={columns}
-          components={{ Toolbar: GridToolbar }}
           getRowId={(row) => row._id}
         />
       </Box>

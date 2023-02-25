@@ -1,4 +1,12 @@
-import { Box, Button, TextField } from "@mui/material";
+import {
+  Box,
+  Button,
+  MenuItem,
+  Select,
+  InputLabel,
+  FormControl,
+  TextField,
+} from "@mui/material";
 import { Formik } from "formik";
 import * as yup from "yup";
 import useMediaQuery from "@mui/material/useMediaQuery";
@@ -6,9 +14,16 @@ import Header from "../../components/Header";
 import axios from "axios";
 
 const doctorSchema = yup.object().shape({
-  doctorName: yup.string().required("required"),
+  doctorName: yup
+    .string()
+    .matches(/^\s*\S.*$/, 'Whitespace is not allowed')
+    .required("required"),
+    
   specialist: yup.string().required("required"),
-  discription: yup.string().required("required"),
+  discription: yup
+  .string()
+  .matches(/^\s*\S.*$/, 'Whitespace is not allowed')
+  .required("required"),
   experience: yup.number().required("required"),
 });
 
@@ -30,7 +45,6 @@ const AddDoctors = () => {
       })
       .catch((error) => {});
   };
-
   return (
     <Box m="20px">
       <Header title="Add Doctors" subtitle="Add New Doctor Profile" />
@@ -63,26 +77,45 @@ const AddDoctors = () => {
                 label="First Name"
                 onBlur={handleBlur}
                 onChange={handleChange}
-                value={values.firstName}
+                value={values.doctorName}
                 name="doctorName"
-                error={!!touched.firstName && !!errors.firstName}
-                helperText={touched.firstName && errors.firstName}
+                error={!!touched.doctorName && !!errors.doctorName}
+                helperText={touched.doctorName && errors.doctorName}
                 sx={{ gridColumn: "span 2" }}
               />
 
-              <TextField
-                fullWidth
+              <FormControl
+                required
                 variant="filled"
-                type="text"
-                label="Specialist"
-                onBlur={handleBlur}
-                onChange={handleChange}
-                value={values.email}
-                name="specialist"
-                error={!!touched.email && !!errors.email}
-                helperText={touched.email && errors.email}
-                sx={{ gridColumn: "span 2" }}
-              />
+                sx={{ gridColumn: "span 4" }}
+              >
+                <InputLabel id="demo-simple-select-required-label">
+                  Specialist
+                </InputLabel>
+                <Select
+                  labelId="demo-simple-select-required-label"
+                  id="demo-simple-select-required"
+                  value={values?.specialist}
+                  label="Time Schedule"
+                  name="specialist"
+                  defaultValue=""
+                  onBlur={handleBlur}
+                  error={!!touched.specialist && !!errors.specialist}
+                  helperText={touched.specialist && errors.specialist}
+                  onChange={handleChange}
+                >
+                  <MenuItem value="Prosthodontist">Prosthodontist</MenuItem>
+                  <MenuItem value="Oral and Maxillofacial Surgeon">
+                    Oral and Maxillofacial Surgeon
+                  </MenuItem>
+                  <MenuItem value="Orthodontics">Orthodontics</MenuItem>
+                  <MenuItem value="Pedodontics">Pedodontics</MenuItem>
+                  <MenuItem value="Implantologis">Implantologis</MenuItem>
+                  <MenuItem value="   Root Canal Treatment">
+                    Root Canal Treatment
+                  </MenuItem>
+                </Select>
+              </FormControl>
               <TextField
                 fullWidth
                 variant="filled"
@@ -90,10 +123,10 @@ const AddDoctors = () => {
                 label="Discription"
                 onBlur={handleBlur}
                 onChange={handleChange}
-                value={values.contact}
+                value={values.discription}
                 name="discription"
-                error={!!touched.contact && !!errors.contact}
-                helperText={touched.contact && errors.contact}
+                error={!!touched.discription && !!errors.discription}
+                helperText={touched.discription && errors.discription}
                 sx={{ gridColumn: "span 2" }}
               />
               <TextField
@@ -103,10 +136,10 @@ const AddDoctors = () => {
                 label="Experience"
                 onBlur={handleBlur}
                 onChange={handleChange}
-                value={values.firstName}
+                value={values.experience}
                 name="experience"
-                error={!!touched.firstName && !!errors.firstName}
-                helperText={touched.firstName && errors.firstName}
+                error={!!touched.experience && !!errors.experience}
+                helperText={touched.experience && errors.experience}
                 sx={{ gridColumn: "span 2" }}
               />
             </Box>

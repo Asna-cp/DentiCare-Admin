@@ -14,18 +14,16 @@ const Doctors = () => {
   const [change, setChange] = useState(false);
   async function getDoctors() {
     axios
-      .get("http://localhost:8080/api/v1/user/alldoctors")
-      .then((response) => {
-        setDoctors(response?.data);
-      });
+    .get("http://localhost:8080/api/v1/user/alldoctors")
+    .then((response) => {
+      setDoctors(response?.data);
+    });
   }
   useEffect(() => {
     getDoctors();
   }, [change]);
 
-  // const handleRowClick = (param, event) => {
-  //   event.stopPropagation();
-  // };
+  //REMOVE DOCTORS
 
   function removeDoctor(id) {
     axios
@@ -107,7 +105,6 @@ const Doctors = () => {
           rows={doctors}
           columns={columns}
           getRowId={(row) => row._id}
-          // onRowClick={handleRowClick}
         />
       </Box>
     </Box>

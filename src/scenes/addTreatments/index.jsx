@@ -5,26 +5,39 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import Header from "../../components/Header";
 import axios from "axios";
 
+const treatmentSchema = yup.object().shape({
+  treatmentname: yup
+    .string()
+    .matches(/^\s*\S.*$/, "Whitespace is not allowed")
+    .required("required"),
+  description: yup
+    .string()
+    .matches(/^\s*\S.*$/, "Whitespace is not allowed")
+    .required("required"),
+  about: yup
+    .string()
+    .matches(/^\s*\S.*$/, "Whitespace is not allowed")
+    .required("required"),
+});
+const initialValues = {
+  treatmentname: "",
+  description: "",
+  about: "",
+};
+
 const AddTreatments = () => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
-  const initialValues = {
-    treatmentname: "",
-    discription: "",
-    about: "",
-  };
+
   const handleFormSubmit = (values) => {
     axios
-    .post(`${process.env.REACT_APP_PORT}/addTreatments`, values)
-    .then((response) => {
-    if (response) {
-      window.location.reload();
-    }
-  })
-  .catch((error) => {});
-};
-  //   navigate("");
-  // }).catch(error) => {
-  // });
+      .post(`${process.env.REACT_APP_PORT}/addTreatments`, values)
+      .then((response) => {
+        if (response) {
+          window.location.reload();
+        }
+      })
+      .catch((error) => {});
+  };
 
   return (
     <Box m="20px">
@@ -32,7 +45,7 @@ const AddTreatments = () => {
       <Formik
         onSubmit={handleFormSubmit}
         initialValues={initialValues}
-        // validationSchema={checkoutSchema}
+        validationSchema={treatmentSchema}
       >
         {({
           values,
@@ -58,10 +71,10 @@ const AddTreatments = () => {
                 label="Treatment Name"
                 onBlur={handleBlur}
                 onChange={handleChange}
-                value={values.firstName}
+                value={values.treatmentname}
                 name="treatmentname"
-                error={!!touched.firstName && !!errors.firstName}
-                helperText={touched.firstName && errors.firstName}
+                error={!!touched.treatmentname && !!errors.treatmentname}
+                helperText={touched.treatmentname && errors.treatmentname}
                 sx={{ gridColumn: "span 2" }}
               />
 
@@ -69,13 +82,13 @@ const AddTreatments = () => {
                 fullWidth
                 variant="filled"
                 type="text"
-                label="Discription"
+                label="Description"
                 onBlur={handleBlur}
                 onChange={handleChange}
-                value={values.contact}
-                name="discription"
-                error={!!touched.contact && !!errors.contact}
-                helperText={touched.contact && errors.contact}
+                value={values.description}
+                name="description"
+                error={!!touched.description && !!errors.description}
+                helperText={touched.description && errors.description}
                 sx={{ gridColumn: "span 2" }}
               />
               <TextField
@@ -85,10 +98,10 @@ const AddTreatments = () => {
                 label="About"
                 onBlur={handleBlur}
                 onChange={handleChange}
-                value={values.contact}
+                value={values.about}
                 name="about"
-                error={!!touched.contact && !!errors.contact}
-                helperText={touched.contact && errors.contact}
+                error={!!touched.about && !!errors.about}
+                helperText={touched.about && errors.about}
                 sx={{ gridColumn: "span 2" }}
               />
             </Box>
@@ -102,26 +115,6 @@ const AddTreatments = () => {
       </Formik>
     </Box>
   );
-};
-
-const phoneRegExp =
-  /^((\+[1-9]{1,4}[ -]?)|(\([0-9]{2,3}\)[ -]?)|([0-9]{2,4})[ -]?)*?[0-9]{3,4}[ -]?[0-9]{3,4}$/;
-
-const checkoutSchema = yup.object().shape({
-  firstName: yup.string().required("required"),
-  lastName: yup.string().required("required"),
-  email: yup.string().email("invalid email").required("required"),
-  contact: yup
-    .string()
-    .matches(phoneRegExp, "Phone number is not valid")
-    .required("required"),
-  address1: yup.string().required("required"),
-  address2: yup.string().required("required"),
-});
-const initialValues = {
-  treatmentname: "",
-  discription: "",
-  about: "",
 };
 
 export default AddTreatments;

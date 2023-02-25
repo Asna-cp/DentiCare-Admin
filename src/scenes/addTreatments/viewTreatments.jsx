@@ -11,6 +11,7 @@ const ViewTreatments = () => {
   const colors = tokens(theme.palette.mode);
 
   const [treatments, setTreatments] = useState([]);
+  const [change, setChange] = useState(false);
 
   async function ViewTreatments() {
     axios
@@ -21,7 +22,14 @@ const ViewTreatments = () => {
   }
   useEffect(() => {
     ViewTreatments();
-  }, []);
+  }, [change]);
+
+  //REMOVE TREATMENTS
+  function removeTreatments(id) {
+    axios
+      .post(`${process.env.REACT_APP_PORT}/removeTreatments/${id}`)
+      .then(change === true ? setChange(false) : setChange(true));
+  }
 
   const columns = [
     { field: "_id", headerName: "ID" },
@@ -32,8 +40,8 @@ const ViewTreatments = () => {
       cellClassName: "name-column--cell",
     },
     {
-      field: "discription",
-      headerName: "Discription",
+      field: "description",
+      headerName: "Description",
       headerAlign: "left",
       align: "left",
     },
@@ -47,9 +55,13 @@ const ViewTreatments = () => {
       field: "access",
       headerName: "Access Level",
       flex: 1,
-      renderCell: ({ row: { access } }) => {
+      renderCell: (cellValues) => {
         return (
-          <Button size="md" sx={{ backgroundColor: "grey" }}>
+          <Button
+            onClick={() => removeTreatments(cellValues.row._id)}
+            size="md"
+            sx={{ backgroundColor: "grey" }}
+          >
             Remove
           </Button>
         );
