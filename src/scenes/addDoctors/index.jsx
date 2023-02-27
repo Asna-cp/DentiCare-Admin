@@ -12,6 +12,7 @@ import * as yup from "yup";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Header from "../../components/Header";
 import axios from "axios";
+import { useState } from "react";
 
 const doctorSchema = yup.object().shape({
   doctorName: yup
@@ -20,31 +21,61 @@ const doctorSchema = yup.object().shape({
     .required("required"),
     
   specialist: yup.string().required("required"),
-  discription: yup
+  description: yup
   .string()
   .matches(/^\s*\S.*$/, 'Whitespace is not allowed')
   .required("required"),
+  // image: yup.string().required("required"),
   experience: yup.number().required("required"),
 });
 
 const initialValues = {
   doctorName: "",
   specialist: "",
-  discription: "",
+  description: "",
+  // image: "",
   experience: "",
 };
 const AddDoctors = () => {
+const [image, setImage] = useState();
   const isNonMobile = useMediaQuery("(min-width:600px)");
   const handleFormSubmit = (values) => {
+
     axios
-      .post(`${process.env.REACT_APP_PORT}/addDoctors`, values)
+      .post(`${process.env.REACT_APP_PORT}/addDoctors`, {values,image})
       .then((response) => {
         if (response) {
+          console.log(response);
           window.location.reload();
         }
       })
       .catch((error) => {});
   };
+
+  //FOR IMAGE
+
+const convertBase64 = (file) => {
+  return new Promise((resolve, reject) => {
+    const fileReader = new FileReader();
+    fileReader.readAsDataURL(file);
+
+    fileReader.onload = () => {
+      resolve(fileReader.result);
+    };
+    fileReader.onerror = (error) => {
+      reject(error);
+    };
+  });
+};
+const fileUpload = async (e) => {
+  const file = e.target.files[0];
+  console.log(file);
+  const base64 = await convertBase64(file);
+  setImage(base64);
+};
+
+
+
   return (
     <Box m="20px">
       <Header title="Add Doctors" subtitle="Add New Doctor Profile" />
@@ -120,13 +151,13 @@ const AddDoctors = () => {
                 fullWidth
                 variant="filled"
                 type="text"
-                label="Discription"
+                label="Description"
                 onBlur={handleBlur}
                 onChange={handleChange}
-                value={values.discription}
-                name="discription"
-                error={!!touched.discription && !!errors.discription}
-                helperText={touched.discription && errors.discription}
+                value={values.description}
+                name="description"
+                error={!!touched.description && !!errors.description}
+                helperText={touched.description && errors.description}
                 sx={{ gridColumn: "span 2" }}
               />
               <TextField
@@ -142,6 +173,19 @@ const AddDoctors = () => {
                 helperText={touched.experience && errors.experience}
                 sx={{ gridColumn: "span 2" }}
               />
+               <TextField
+                fullWidth
+                variant="filled"
+                type="file"
+                label="Image"
+                onBlur={handleBlur}
+                onChange={fileUpload}
+             
+                sx={{ gridColumn: "span 2" }}
+              />
+            </Box>
+            <Box>
+              {image && <img style={{height: '36px',width: '42px'}} src={image} alt='' /> }
             </Box>
             <Box display="flex" justifyContent="end" mt="20px">
               <Button type="submit" color="secondary" variant="contained">

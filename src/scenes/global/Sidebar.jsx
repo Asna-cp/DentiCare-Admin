@@ -5,10 +5,11 @@ import { Box, IconButton, Typography, useTheme } from "@mui/material";
 import { Link } from "react-router-dom";
 import { tokens } from "../../theme";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
-import PeopleOutlinedIcon from "@mui/icons-material/PeopleOutlined";
 import HomeWorkOutlinedIcon from "@mui/icons-material/HomeWorkOutlined";
 import ApartmentOutlinedIcon from "@mui/icons-material/ApartmentOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
+import PersonAddIcon from "@mui/icons-material/PersonAdd";
+import PeopleOutlinedIcon from "@mui/icons-material/PeopleOutlined";
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
@@ -119,7 +120,7 @@ const Sidebar = () => {
             <Item
               title="Add Doctors"
               to="/adddoctors"
-              icon={<PeopleOutlinedIcon />}
+              icon={<PersonAddIcon />}
               selected={selected}
               setSelected={setSelected}
             />

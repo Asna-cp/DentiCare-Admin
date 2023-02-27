@@ -13,7 +13,7 @@ const ViewAppointments = () => {
   const [appointments, setAppointments] = useState([]);
   async function ViewAppointments() {
     axios
-      .get("http://localhost:8080/admin/allappointments")
+      .get(`${process.env.REACT_APP_PORT}/allappointments`)
       .then((response) => {
         setAppointments(response?.data);
       });

@@ -14,8 +14,10 @@ const Doctors = () => {
   const [change, setChange] = useState(false);
   async function getDoctors() {
     axios
-    .get("http://localhost:8080/api/v1/user/alldoctors")
+    .get(`${process.env.REACT_APP_PORT}/alldoctors`)
+    // .get("http://localhost:8080/api/v1/user/alldoctors")
     .then((response) => {
+      debugger
       setDoctors(response?.data);
     });
   }
@@ -26,9 +28,13 @@ const Doctors = () => {
   //REMOVE DOCTORS
 
   function removeDoctor(id) {
+    
     axios
-      .post(`http://localhost:8080/admin/removeDoctor/${id}`)
+  
+    .post(`${process.env.REACT_APP_PORT}/removeDoctor/${id}`)
+      // .post(`http://localhost:8080/admin/removeDoctor/${id}`)
       .then(change === true ? setChange(false) : setChange(true));
+      debugger
   }
 
   const columns = [
@@ -46,8 +52,8 @@ const Doctors = () => {
       align: "left",
     },
     {
-      field: "discription",
-      headerName: "Discription",
+      field: "description",
+      headerName: "Description",
       flex: 1,
     },
 

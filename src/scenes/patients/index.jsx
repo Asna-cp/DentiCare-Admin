@@ -16,7 +16,8 @@ const Team = () => {
 
   async function Team() {
     axios
-      .get("http://localhost:8080/api/v1/user/allpatients")
+    .get(`${process.env.REACT_APP_PORT}/allpatients`)
+      // .get("http://localhost:8080/api/v1/user/allpatients")
       .then((response) => {
         setPatients(response?.data);
       });
