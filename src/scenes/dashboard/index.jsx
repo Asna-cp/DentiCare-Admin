@@ -8,14 +8,62 @@ import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import PeopleOutlinedIcon from "@mui/icons-material/PeopleOutlined";
 import TrafficIcon from "@mui/icons-material/Traffic";
 import Header from "../../components/Header";
+import axios from "axios";
+import { useState } from "react";
+import { useEffect } from "react";
 
 
 import StatBox from "../../components/StatBox";
 import ProgressCircle from "../../components/ProgressCircle";
 
 const Dashboard = () => {
+  const [userCount, setUserCount] = useState([]);
+  const [patientsCount, setPatientsCount] = useState([]);
+  const [appointmentsCount, setappointmentsCount] = useState([]);
+
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+
+  // async function getDoctors() {
+  //   axios.get(`${process.env.REACT_APP_PORT}/alldoctors`).then((response) => {
+  //     setDoctors(response?.data);
+  //   });
+  // }
+  // useEffect(() => {
+  //   getDoctors();
+  // }, []);
+
+  //DOCTOR COUNT
+
+  useEffect(() => {
+    axios.get(`${process.env.REACT_APP_PORT}/getDoctorCount`)
+      .then(response => {
+        setUserCount(response.data);
+      })
+      .catch(error => {
+      });
+  }, []);
+
+
+  //PATIENTS COUNT
+  useEffect(() => {
+    axios.get(`${process.env.REACT_APP_PORT}/patientsCount`)
+      .then(response => {
+        setPatientsCount(response.data);
+      })
+      .catch(error => {
+      });
+  }, []);
+
+//APPOINTMENTS COUNT
+  useEffect(() => {
+    axios.get(`${process.env.REACT_APP_PORT}/appointmentsCount`)
+      .then(response => {
+        setappointmentsCount(response.data);
+      })
+      .catch(error => {
+      });
+  }, []);
 
   return (
     <Box m="20px">
@@ -55,7 +103,7 @@ const Dashboard = () => {
           justifyContent="center"
         >
           <StatBox
-            title="12,361"
+            title={userCount}
             subtitle="AllDoctors"
             progress="0.75"
             increase="+14%"
@@ -94,7 +142,7 @@ const Dashboard = () => {
           justifyContent="center"
         >
           <StatBox
-            title="32,441"
+            title={patientsCount}
             subtitle="New Patients"
             progress="0.30"
             increase="+5%"
@@ -113,7 +161,7 @@ const Dashboard = () => {
           justifyContent="center"
         >
           <StatBox
-            title="1,325,134"
+            title={appointmentsCount}
             subtitle="Appointments Received"
             progress="0.80"
             increase="+43%"

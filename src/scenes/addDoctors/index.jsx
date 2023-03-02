@@ -39,6 +39,7 @@ const initialValues = {
 const AddDoctors = () => {
 const [image, setImage] = useState();
   const isNonMobile = useMediaQuery("(min-width:600px)");
+  
   const handleFormSubmit = (values) => {
 
     axios
