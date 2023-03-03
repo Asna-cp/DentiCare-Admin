@@ -6,18 +6,20 @@ import Header from "../../components/Header";
 import axios from "axios";
 import { useState } from "react";
 
+const message = "Whitespace is not allowed"
+
 const treatmentSchema = yup.object().shape({
   treatmentname: yup
     .string()
-    .matches(/^\s*\S.*$/, "Whitespace is not allowed")
+    .matches(/^\s*\S.*$/, message)
     .required("required"),
   description: yup
     .string()
-    .matches(/^\s*\S.*$/, "Whitespace is not allowed")
+    .matches(/^\s*\S.*$/, message)
     .required("required"),
   about: yup
     .string()
-    .matches(/^\s*\S.*$/, "Whitespace is not allowed")
+    .matches(/^\s*\S.*$/, message)
     .required("required"),
 });
 const initialValues = {

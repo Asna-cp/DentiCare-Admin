@@ -1,78 +1,52 @@
-import { Box, Button, IconButton, Typography, useTheme } from "@mui/material";
+import { Box, Button, useTheme } from "@mui/material";
 import { tokens } from "../../theme";
-import { mockTransactions } from "../../data/mockData";
-import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
-import EmailIcon from "@mui/icons-material/Email";
-import PointOfSaleIcon from "@mui/icons-material/PointOfSale";
-import PersonAddIcon from "@mui/icons-material/PersonAdd";
+// import { mockTransactions } from "../../data/mockData";
+// import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
+import VaccinesOutlinedIcon from '@mui/icons-material/VaccinesOutlined';
+// import PersonAddIcon from "@mui/icons-material/PersonAdd";
+import LocalHospitalOutlinedIcon from '@mui/icons-material/LocalHospitalOutlined';
 import PeopleOutlinedIcon from "@mui/icons-material/PeopleOutlined";
-import TrafficIcon from "@mui/icons-material/Traffic";
+import SwitchAccountOutlinedIcon from '@mui/icons-material/SwitchAccountOutlined';
 import Header from "../../components/Header";
 import axios from "axios";
 import { useState } from "react";
 import { useEffect } from "react";
-
-
 import StatBox from "../../components/StatBox";
-import ProgressCircle from "../../components/ProgressCircle";
+import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
-  const [userCount, setUserCount] = useState([]);
-  const [patientsCount, setPatientsCount] = useState([]);
-  const [appointmentsCount, setappointmentsCount] = useState([]);
+  const [userCount, setUserCount] = useState("");
+  const [doctorCount, setDoctorCount] = useState("");
+  const [appointmentCount, setappointmentCount] = useState("");
+  const [treatmentCount, setTreatmentCount] = useState("");
 
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
-  // async function getDoctors() {
-  //   axios.get(`${process.env.REACT_APP_PORT}/alldoctors`).then((response) => {
-  //     setDoctors(response?.data);
-  //   });
-  // }
-  // useEffect(() => {
-  //   getDoctors();
-  // }, []);
+  const navigate = useNavigate();
+  const [allCount, setAllCount] = useState([]);
 
-  //DOCTOR COUNT
+  const getShortInfo = async () => {
+    const { data } = await axios.get(`${process.env.REACT_APP_PORT}/allCounts`);
+    setUserCount(data.patientsCount);
+    setDoctorCount(data.doctorsCount);
+    setappointmentCount(data.appointmentsCount);
+    setTreatmentCount(data.treatmentsCount);
+  };
 
   useEffect(() => {
-    axios.get(`${process.env.REACT_APP_PORT}/getDoctorCount`)
-      .then(response => {
-        setUserCount(response.data);
-      })
-      .catch(error => {
-      });
+    getShortInfo();
   }, []);
 
-
-  //PATIENTS COUNT
-  useEffect(() => {
-    axios.get(`${process.env.REACT_APP_PORT}/patientsCount`)
-      .then(response => {
-        setPatientsCount(response.data);
-      })
-      .catch(error => {
-      });
-  }, []);
-
-//APPOINTMENTS COUNT
-  useEffect(() => {
-    axios.get(`${process.env.REACT_APP_PORT}/appointmentsCount`)
-      .then(response => {
-        setappointmentsCount(response.data);
-      })
-      .catch(error => {
-      });
-  }, []);
-
+ 
   return (
     <Box m="20px">
       {/* HEADER */}
       <Box display="flex" justifyContent="space-between" alignItems="center">
         <Header title="DASHBOARD" subtitle="Welcome to your dashboard" />
 
-        <Box>
-          <Button
+        {/* <Box> */}
+          {/* <Button
             sx={{
               backgroundColor: colors.blueAccent[700],
               color: colors.grey[100],
@@ -80,11 +54,11 @@ const Dashboard = () => {
               fontWeight: "bold",
               padding: "10px 20px",
             }}
-          >
-            <DownloadOutlinedIcon sx={{ mr: "10px" }} />
-            Download Reports
-          </Button>
-        </Box>
+          > */}
+            {/* <DownloadOutlinedIcon sx={{ mr: "10px" }} />
+            Download Reports */}
+          {/* </Button> */}
+        {/* </Box> */}
       </Box>
 
       {/* GRID & CHARTS */}
@@ -103,12 +77,11 @@ const Dashboard = () => {
           justifyContent="center"
         >
           <StatBox
-            title={userCount}
+            title={doctorCount}
             subtitle="AllDoctors"
             progress="0.75"
             increase="+14%"
             icon={
-              
               <PeopleOutlinedIcon
                 sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
               />
@@ -123,12 +96,12 @@ const Dashboard = () => {
           justifyContent="center"
         >
           <StatBox
-            title="431,225"
-            subtitle="Sales Obtained"
+            title={treatmentCount}
+            subtitle="Treatments"
             progress="0.50"
             increase="+21%"
             icon={
-              <PointOfSaleIcon
+              <VaccinesOutlinedIcon
                 sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
               />
             }
@@ -142,12 +115,14 @@ const Dashboard = () => {
           justifyContent="center"
         >
           <StatBox
-            title={patientsCount}
+            title={userCount}
             subtitle="New Patients"
             progress="0.30"
             increase="+5%"
             icon={
-              <PersonAddIcon
+          
+              <LocalHospitalOutlinedIcon
+              // <PersonAddIcon
                 sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
               />
             }
@@ -161,12 +136,13 @@ const Dashboard = () => {
           justifyContent="center"
         >
           <StatBox
-            title={appointmentsCount}
+            title={appointmentCount}
             subtitle="Appointments Received"
-            progress="0.80"
-            increase="+43%"
+            // progress="0.80"
+            // increase="+43%"
+           
             icon={
-              <TrafficIcon
+              <SwitchAccountOutlinedIcon
                 sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
               />
             }
@@ -270,25 +246,25 @@ const Dashboard = () => {
           backgroundColor={colors.primary[400]}
           p="30px"
         > */}
-          {/* <Typography variant="h5" fontWeight="600">
+        {/* <Typography variant="h5" fontWeight="600">
             Campaign
           </Typography> */}
-          {/* <Box
+        {/* <Box
             display="flex"
             flexDirection="column"
             alignItems="center"
             mt="25px"
           > */}
-            {/* <ProgressCircle size="125" /> */}
-            {/* <Typography
+        {/* <ProgressCircle size="125" /> */}
+        {/* <Typography
               variant="h5"
               color={colors.greenAccent[500]}
               sx={{ mt: "15px" }}
             >
               $48,352 revenue generated
             </Typography> */}
-            {/* <Typography>Includes extra misc expenditures and costs</Typography> */}
-          {/* </Box>
+        {/* <Typography>Includes extra misc expenditures and costs</Typography> */}
+        {/* </Box>
         </Box> */}
         {/* <Box
           gridColumn="span 4"
