@@ -28,7 +28,7 @@ const Login = () => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
   const handleFormSubmit = (values) => {
     axios
-      .post(`${process.env.REACT_APP_PORT}login`, { values })
+      .post(`${process.env.REACT_APP_PORT}/login`, { values })
       .then((response) => {
         if (response) {
           const result = response.data;
