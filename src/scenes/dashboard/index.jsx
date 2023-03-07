@@ -1,4 +1,4 @@
-import { Box, Button, useTheme } from "@mui/material";
+import { Box,useTheme } from "@mui/material";
 import { tokens } from "../../theme";
 // import { mockTransactions } from "../../data/mockData";
 // import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
@@ -12,7 +12,7 @@ import axios from "axios";
 import { useState } from "react";
 import { useEffect } from "react";
 import StatBox from "../../components/StatBox";
-import { useNavigate } from "react-router-dom";
+
 
 const Dashboard = () => {
   const [userCount, setUserCount] = useState("");
@@ -23,8 +23,6 @@ const Dashboard = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
-  const navigate = useNavigate();
-  const [allCount, setAllCount] = useState([]);
 
   const getShortInfo = async () => {
     const { data } = await axios.get(`${process.env.REACT_APP_PORT}/allCounts`);
