@@ -26,7 +26,7 @@ const ViewAppointments = () => {
   const columns = [
     { field: "_id", headerName: "ID", flex: 0.5 },
     {
-      field: "name",
+      field: "firstName",
       headerName: "Name",
       flex: 1,
       cellClassName: "name-column--cell",

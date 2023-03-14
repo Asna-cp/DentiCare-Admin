@@ -29,7 +29,7 @@ const ViewTreatments = () => {
   function removeTreatments(id) {
     axios
       .post(`${process.env.REACT_APP_PORT}/removeTreatments/${id}`)
-      .then(change === true ? setChange(false) : setChange(true));
+      .then(change === true ? setChange(!change) : setChange(!change));
   }
 
   const columns = [
