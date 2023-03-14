@@ -14,16 +14,24 @@ import Header from "../../components/Header";
 import axios from "axios";
 import { useState } from "react";
 
+// const Whitespace = {
+//   RegExp: /^\s*\S.*$/, 
+//   message: 'Whitespace is not allowed',
+// }
+//validation for whitespace
+const RegExp = /^\s*\S.*$/
+const message = 'Whitespace is not allowed'
+
 const doctorSchema = yup.object().shape({
   doctorName: yup
     .string()
-    .matches(/^\s*\S.*$/, 'Whitespace is not allowed')
+    .matches(RegExp, message)
     .required("required"),
     
   specialist: yup.string().required("required"),
   description: yup
   .string()
-  .matches(/^\s*\S.*$/, 'Whitespace is not allowed')
+  .matches(RegExp, message)
   .required("required"),
   // image: yup.string().required("required"),
   experience: yup.number().required("required"),
@@ -54,7 +62,6 @@ const [image, setImage] = useState();
   };
 
   //FOR IMAGE
-
 const convertBase64 = (file) => {
   return new Promise((resolve, reject) => {
     const fileReader = new FileReader();
