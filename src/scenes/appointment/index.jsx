@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import { tokens } from "../../theme";
 import { useTheme } from "@mui/material";
@@ -10,7 +10,10 @@ import { useEffect } from "react";
 const ViewAppointments = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+
   const [appointments, setAppointments] = useState([]);
+  const [change, setChange] = useState(false);
+
   async function ViewAppointments() {
     axios
       .get(`${process.env.REACT_APP_PORT}/allappointments`)
@@ -23,6 +26,13 @@ const ViewAppointments = () => {
     ViewAppointments();
   }, []);
 
+  //CANCEL APPOINTMENTS
+  function cancelAppointment(id) {
+    axios
+      .post(`${process.env.REACT_APP_PORT}/cancelAppointment/${id}`)
+      // .post(`http://localhost:8080/admin/removeDoctor/${id}`)
+      .then(change === true ? setChange(false) : setChange(true));
+  }
   const columns = [
     { field: "_id", headerName: "ID", flex: 0.5 },
     {
@@ -56,6 +66,22 @@ const ViewAppointments = () => {
       field: "time",
       headerName: "Time",
       flex: 1,
+    },
+    {
+      field: "access",
+      headerName: "Access Level",
+      flex: 1,
+      renderCell: (cellValues) => {
+        return (
+          <Button
+            onClick={() => cancelAppointment(cellValues.row._id)}
+            size="md"
+            sx={{ backgroundColor: "grey" }}
+          >
+            cancel
+          </Button>
+        );
+      },
     },
   ];
 
