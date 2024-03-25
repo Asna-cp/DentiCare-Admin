@@ -11,22 +11,22 @@ import AddDoctors from "./scenes/addDoctors";
 import Appointments from "./scenes/appointment";
 import Treatments from "./scenes/addTreatments";
 import ViewTreatments from "./scenes/addTreatments/viewTreatments";
-import Login from "./scenes/login/login";
+// import Login from "./scenes/login/login";
 
 function App() {
   const [theme, colorMode] = useMode();
-  const adminToken = localStorage.getItem("adminToken");
+  // const adminToken = localStorage.getItem("adminToken");
 
   return (
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <div className="app">
-          {!adminToken ? (
+          {/* {!adminToken ? ( */}
             <Routes>
-              <Route path="/" element={<Login />} />
+              {/* <Route path="/" element={<Login />} /> */}
             </Routes>
-          ) : (
+          {/* ) : ( */}
             <>
               <Sidebar />
               <main className="content">
@@ -42,7 +42,7 @@ function App() {
                 </Routes>
               </main>
             </>
-          )}
+          {/* )} */}
         </div>
       </ThemeProvider>
     </ColorModeContext.Provider>

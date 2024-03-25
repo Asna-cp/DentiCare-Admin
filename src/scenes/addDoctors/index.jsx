@@ -13,6 +13,8 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import Header from "../../components/Header";
 import axios from "axios";
 import { useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 // const Whitespace = {
 //   RegExp: /^\s*\S.*$/, 
@@ -35,8 +37,8 @@ const doctorSchema = yup.object().shape({
   .required("required"),
   // image: yup.string().required("required"),
   experience: yup.number().required("required"),
+  
 });
-
 const initialValues = {
   doctorName: "",
   specialist: "",
@@ -54,11 +56,14 @@ const [image, setImage] = useState();
       .post(`${process.env.REACT_APP_PORT}/addDoctors`, {values,image})
       .then((response) => {
         if (response) {
+          toast.success("Doctor Added Successful");
           console.log(response);
           window.location.reload();
-        }
+        } 
       })
-      .catch((error) => {});
+      .catch((error) => {
+        
+      });
   };
 
   //FOR IMAGE
@@ -85,6 +90,10 @@ const fileUpload = async (e) => {
 
 
   return (
+    <div>
+
+      <ToastContainer />
+   
     <Box m="20px">
       <Header title="Add Doctors" subtitle="Add New Doctor Profile" />
       <Formik
@@ -204,6 +213,7 @@ const fileUpload = async (e) => {
         )}
       </Formik>
     </Box>
+    </div>
   );
 };
 
